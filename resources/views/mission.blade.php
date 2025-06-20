@@ -5,11 +5,24 @@
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+
+  <style>
+    /* Simple fade-in animation for text */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
 </head>
 <body>
   <!-- Navbar -->
@@ -33,7 +46,7 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
@@ -41,18 +54,16 @@
   </nav>
 
 <!-- Mission & Vision Content -->
-<div class="container my-5">
+<div class="container my-5" id="mission-vision-section">
   <h1 class="mb-4 text-primary text-center">Our Mission & Vision</h1>
   <div class="row align-items-center">
-    <!-- Video Column (Left Side) -->
+  
     <div class="col-md-6 mb-3">
-      <video controls class="img-fluid rounded shadow" style="width:100%; height:auto;">
-        <source src="{{ asset('doc.mp4') }}" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+       <img src="{{ asset('images/mission.jpg') }}" alt="mission" class="img-fluid rounded shadow fade-in" />
+        
     </div>
     <!-- Text Content Column (Right Side) -->
-    <div class="col-md-6">
+    <div class="col-md-6 fade-in">
       <h3>Mission</h3>
       <p>
         Our mission is to ensure that every individual has access to safe, effective, and affordable medications.
@@ -67,16 +78,38 @@
   </div>
 </div>
 
+
 <!-- Footer -->
-<footer class="footer text-white py-3">
-  <div class="container text-center">
+<footer class="footer py-3">
+  <div class="container text-center text-black">
     <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-    <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-    <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-    <a href="{{ url('/contact') }}" class="text-white">Contact</a> 
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  // Fade in mission & vision content on scroll
+  document.addEventListener('DOMContentLoaded', () => {
+    const fadeElements = document.querySelectorAll('.fade-in');
+
+    function checkVisibility() {
+      const triggerBottom = window.innerHeight * 0.9;
+      fadeElements.forEach(el => {
+        const boxTop = el.getBoundingClientRect().top;
+        if (boxTop < triggerBottom) {
+          el.classList.add('visible');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', checkVisibility);
+    checkVisibility(); // initial check
+  });
+</script>
+
 </body>
 </html>

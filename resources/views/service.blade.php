@@ -5,7 +5,7 @@
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
@@ -33,17 +33,16 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
     </div>
   </nav>
 
-
   <!-- Terms of Service Content -->
   <section class="container my-5">
-    <h2 class="text-center mb-4">Terms of Service</h2>
+    <h2 class="text-center mb-4">Terms Of Service</h2>
 
     <p>
       Welcome to QuickMeds Pharmacy. By accessing or using our website, you agree to comply with and be bound by the following terms and conditions. Please read them carefully.
@@ -87,16 +86,20 @@
     <p>Last updated: June 2025</p>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer py-3 bg-dark text-white">
-    <div class="container text-center">
-      <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-      <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-      <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-      <a href="{{ url('/contact') }}" class="text-white">Contact</a>
-    </div>
-  </footer>
+ 
+ 
+<!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
+    <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
+  </div>
+</footer>
 
+  <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 </html>

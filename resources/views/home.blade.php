@@ -2,16 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 </head>
 <body>
+
+<div class="main-content">
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
     <div class="container-fluid">
@@ -33,7 +37,7 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
@@ -48,7 +52,7 @@
         <!-- Slide 1 -->
         <div class="carousel-item active">
           <img src="{{ asset('images/pharmacist.jpg') }}" class="d-block w-100" alt="Pharmacist Helping Customer" />
-          <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
+          <div class="carousel-caption d-block bg-dark bg-opacity-50 rounded p-2">
             <h5>Welcome to QuickMeds Pharmacy</h5>
             <p>Your trusted health partner with quality care.</p>
           </div>
@@ -65,7 +69,7 @@
 
         <!-- Slide 3 -->
         <div class="carousel-item">
-          <img src="{{ asset('images/online.webp') }}" class="d-block w-100" alt="Online Pharmacy Services" />
+          <img src="{{ asset('images/online.jpg') }}" class="d-block w-100" alt="Online Pharmacy Services" />
           <div class="carousel-caption d-none d-md-block bg-dark bg-opacity-50 rounded p-2">
             <h5>Online Ordering & 24/7 Support</h5>
             <p>Get your medicines delivered at your doorstep anytime.</p>
@@ -96,12 +100,14 @@
   </div>
 
   <!-- New Arrivals Section - medicine -->
+
+
   <div class="container my-4">
-    <h2 class="mb-4">New Arrivals</h2>
+    <h2 class="mb-4">New Arrivals </h2>
     <div class="row">
 
       <!-- Dolo 650 (Paracetamol) -->
-      <div class="col-md-3 mb-4">
+       <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img1.jpg') }}" 
                class="card-img-top" 
@@ -115,7 +121,7 @@
       </div>
 
       <!-- Crocin Cold & Flu -->
-      <div class="col-md-3 mb-4">
+     <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img2.webp') }}" 
                class="card-img-top" 
@@ -129,7 +135,7 @@
       </div>
 
       <!-- Liv52 (Liver Tonic) -->
-      <div class="col-md-3 mb-4">
+     <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img3.webp') }}" 
                class="card-img-top" 
@@ -143,7 +149,7 @@
       </div>
 
       <!-- Zincovit (Multivitamin) -->
-      <div class="col-md-3 mb-4">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img4.jpg') }}" 
                class="card-img-top" 
@@ -157,7 +163,7 @@
       </div>
 
       <!-- Rantac (Ranitidine) -->
-      <div class="col-md-3 mb-4">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img5.webp') }}" 
                class="card-img-top" 
@@ -171,7 +177,7 @@
       </div>
 
       <!-- Neurobion (Vitamin B Complex) -->
-      <div class="col-md-3 mb-4">
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img6.webp') }}" 
                class="card-img-top" 
@@ -185,7 +191,7 @@
       </div>
 
       <!-- Ciplox (Ciprofloxacin) -->
-      <div class="col-md-3 mb-4">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img7.webp') }}" 
                class="card-img-top" 
@@ -199,7 +205,7 @@
       </div>
 
       <!-- Vicks Vaporub -->
-      <div class="col-md-3 mb-4">
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
         <div class="card" style="width: 100%;">
           <img src="{{ asset('images/img8.jpg') }}" 
                class="card-img-top" 
@@ -214,6 +220,10 @@
 
     </div>
   </div>
+
+
+
+
 
   <!-- Testimonials Carousel -->
   <section class="bg-light py-5">
@@ -257,6 +267,13 @@
               <h6 class="mb-0 text-primary">– Asheni Bandara</h6>
             </div>
           </div>
+
+          <div class="carousel-item">
+            <div class="card p-4 shadow-sm mx-auto" style="max-width: 600px;">
+              <p class="mb-3">"QuickMeds is a lifesaver! Their prompt delivery and reliable service saved me a trip to the pharmacy. Truly convenient and dependable."</p>
+              <h6 class="mb-0 text-primary">– Pinidi Jayasinghe</h6>
+            </div>
+          </div>
         </div>
 
         <!-- Carousel Controls -->
@@ -275,7 +292,7 @@
   <!-- Location Section -->
   <section class="location" id="about">
     <div class="heading">
-      <h2>OUR LOCATIONS</h2>
+      <h2>Our Locations</h2>
     </div>
     <div class="location-container d-flex justify-content-center flex-wrap gap-4">
       <div class="location-box text-center">
@@ -292,18 +309,18 @@
       </div>
     </div>
   </section>
-
-  <!-- Footer -->
-  <footer class="footer text-white py-3">
-    <div class="container text-center">
-      <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-      <a href="{{ url('privacy') }}" class="text-white me-3">Privacy Policy</a>
-      <a href="{{ url('terms') }}" class="text-white me-3">Terms of Service</a>
-      <a href="{{ url('contact') }}" class="text-white">Contact</a> 
-    </div>
-  </footer>
+<!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
+    <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
+  </div>
+</footer>
 
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
 </body>
 </html>

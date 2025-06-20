@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Pharmacist Dashboard - QuickMeds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="{{ asset('style.css') }}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
@@ -34,7 +34,7 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ url('/search') }}">Search Medicine</a>
+          <a class="nav-link" href="{{ url('/search') }}">Medicine</a>
         </li>
       </ul>
       <!-- Logout Button -->
@@ -86,13 +86,14 @@
   </div>
 </div>
 
+
 <!-- Footer -->
-<footer class="footer text-white py-3 ">
-  <div class="container text-center">
+<footer class="footer py-3">
+  <div class="container text-center text-black">
     <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-    <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-    <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-    <a href="{{ url('/contact') }}" class="text-white">Contact</a>
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
 

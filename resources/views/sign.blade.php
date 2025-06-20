@@ -5,7 +5,7 @@
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
@@ -33,7 +33,7 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
@@ -44,7 +44,7 @@
 <!-- Sign Up Form -->
 <div class="container py-5" style="max-width: 400px;">
   <h2 class="mb-4 text-center">Create Your Account</h2>
-  <form method="POST" action="{{ route('register') }}">
+  <form method="POST" action="{{ route('sign') }}">
     @csrf
     <div class="mb-3">
       <label for="newUsername" class="form-label">Username</label>
@@ -68,6 +68,16 @@
     Already have an account? <a href="{{ url('/login') }}">Login here</a>
   </p>
 </div>
+<!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
+    <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
+  </div>
+</footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

@@ -5,7 +5,7 @@
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
@@ -33,7 +33,7 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
@@ -55,17 +55,62 @@
     </div>
   </div>
 </div>
-
-<!-- Footer -->
-<footer class="footer text-white py-3">
-  <div class="container text-center">
+ <!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
     <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-    <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-    <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-    <a href="{{ url('/contact') }}" class="text-white">Contact</a> 
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const heading = document.querySelector('h1');
+    const image = document.querySelector('.col-md-6 img');
+    const paragraphs = document.querySelectorAll('.col-md-6:nth-child(2) p');
+
+    // Setup initial styles for animation
+    heading.style.opacity = 0;
+    heading.style.transform = 'translateY(-30px)';
+    heading.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
+
+    image.style.opacity = 0;
+    image.style.transform = 'translateX(-50px)';
+    image.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+
+    paragraphs.forEach(p => {
+      p.style.opacity = 0;
+      p.style.transform = 'translateX(50px)';
+      p.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
+    });
+
+    // Animate heading first
+    setTimeout(() => {
+      heading.style.opacity = 1;
+      heading.style.transform = 'translateY(0)';
+    }, 100);
+
+    // Animate image after heading (~900ms)
+    setTimeout(() => {
+      image.style.opacity = 1;
+      image.style.transform = 'translateX(0)';
+    }, 1000);
+
+    // Animate paragraphs one by one, staggered, starting after image (~2s)
+    paragraphs.forEach((p, index) => {
+      setTimeout(() => {
+        p.style.opacity = 1;
+        p.style.transform = 'translateX(0)';
+      }, 2000 + index * 300);
+    });
+  });
+</script>
+
 </body>
 </html>
+

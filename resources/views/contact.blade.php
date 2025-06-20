@@ -5,7 +5,7 @@
   <title>QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
@@ -33,65 +33,97 @@
               <li><a class="dropdown-item" href="{{ url('choose') }}">Why Choose Us</a></li>
             </ul>
           </li>
-          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Search Medicine</a></li>
+          <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
         <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
     </div>
   </nav>
 
-<!-- Contact Section -->
-<section class="container my-5">
-  <h2 class="text-center mb-4">Contact Us</h2>
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <form>
-        <div class="mb-3">
-          <label for="name" class="form-label">Full Name</label>
-          <input
-            type="text"
-            class="form-control"
-            id="name"
-            placeholder="Enter your full name"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input
-            type="email"
-            class="form-control"
-            id="email"
-            placeholder="name@example.com"
-            required
-          />
-        </div>
-        <div class="mb-3">
-          <label for="message" class="form-label">Message</label>
-          <textarea
-            class="form-control"
-            id="message"
-            rows="5"
-            placeholder="Write your message here"
-            required
-          ></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
+  <div class="contact-container my-5">
+    <h2>Contact QuickMeds Pharmacy</h2>
 
-<!-- Footer -->
-<footer class="footer py-3 bg-dark text-white">
-  <div class="container text-center">
+    <div class="contact-item" id="phone" tabindex="0" role="button" aria-label="Phone number" style="cursor:pointer;">
+      <i class="bi bi-telephone-fill"></i>
+      <span>0771234556</span>
+      <div class="tooltip-text">Click to copy phone number</div>
+    </div>
+
+    <div class="contact-item" id="email" tabindex="0" role="button" aria-label="Email address" style="cursor:pointer;">
+      <i class="bi bi-envelope-fill"></i>
+      <span>support@quickmeds.com</span>
+      <div class="tooltip-text">Click to copy email</div>
+    </div>
+
+    <div class="contact-item" style="cursor: default;">
+      <i class="bi bi-geo-alt-fill"></i>
+      <span>No 23, Ward Place, Colombo,Sri Lanka</span>
+     </div>
+  <!-- Working Hours -->
+  <div class="contact-item" style="cursor: default;">
+    <i class="bi bi-clock-fill"></i>
+    <span>Mon - Sat: 8:00 AM - 10:00 PM</span>
+  </div>
+
+  <!-- Social Media -->
+  <div class="contact-item" style="cursor:pointer;" tabindex="0" role="button" aria-label="Follow us on Facebook">
+    <i class="bi bi-facebook"></i>
+    <span>facebook.com/QuickMedsPharmacy</span>
+    <div class="tooltip-text">Click to open Facebook page</div>
+  </div>
+
+  <div class="contact-item" style="cursor:pointer;" tabindex="0" role="button" aria-label="Follow us on Instagram">
+    <i class="bi bi-instagram"></i>
+    <span>@quickmeds.lk</span>
+    <div class="tooltip-text">Click to open Instagram</div>
+  </div>
+</div>
+
+
+ <!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
     <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-    <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-    <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-    <a href="{{ url('/contact') }}" class="text-white">Contact</a> 
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
+ 
+  
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Copy to clipboard and show tooltip
+    function copyToClipboard(text, elem) {
+      navigator.clipboard.writeText(text).then(() => {
+        elem.classList.add('tooltip-show');
+        setTimeout(() => elem.classList.remove('tooltip-show'), 2000);
+      }).catch(() => {
+        alert('Failed to copy, please copy manually.');
+      });
+    }
+
+    document.getElementById('phone').addEventListener('click', () => {
+      copyToClipboard('+94771234567', document.getElementById('phone'));
+    });
+    document.getElementById('email').addEventListener('click', () => {
+      copyToClipboard('support@quickmeds.com', document.getElementById('email'));
+    });
+
+    // Accessibility: allow keyboard copy on Enter/Space
+    ['phone', 'email'].forEach(id => {
+      const elem = document.getElementById(id);
+      elem.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          elem.click();
+        }
+      });
+    });
+  </script>
 </body>
 </html>

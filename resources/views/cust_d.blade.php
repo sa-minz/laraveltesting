@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Customer Dashboard - QuickMeds</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
   <link href="style.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
 </head>
@@ -21,21 +21,21 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link active" href="{{ url('/') }}">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="{{ url('/') }}">HOME</a></li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" data-bs-toggle="dropdown"
-            aria-expanded="false">About Us</a>
+            aria-expanded="false">ABOUT US</a>
           <ul class="dropdown-menu" aria-labelledby="aboutDropdown">
             <li><a class="dropdown-item" href="{{ url('/about') }}">Our Story</a></li>
             <li><a class="dropdown-item" href="{{ url('/mission') }}">Our Mission & Vision</a></li>
             <li><a class="dropdown-item" href="{{ url('/choose') }}">Why Choose Us</a></li>
           </ul>
         </li>
-        <li class="nav-item"><a class="nav-link" href="{{ url('/search') }}">Search Medicine</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ url('/search') }}">SEARCH MEDICINE</a></li>
       </ul>
       <!-- ✅ Logout Button -->
       <a class="btn btn-outline-light" href="{{ url('/logout') }}">
-        <i class="bi bi-box-arrow-left"></i> Logout
+        <i class="bi bi-box-arrow-left"></i> Logout </a><li>
       </a>
     </div>
   </div>
@@ -81,14 +81,13 @@
     </div>
   </div>
 </div>
-
-<!-- Footer -->
-<footer class="footer text-white py-3">
-  <div class="container text-center">
+ <!-- Footer -->
+<footer class="footer py-3">
+  <div class="container text-center text-black">
     <p class="mb-1">© 2024 QuickMeds Pharmacy. All Rights Reserved.</p>
-    <a href="{{ url('/privacy') }}" class="text-white me-3">Privacy Policy</a>
-    <a href="{{ url('/terms') }}" class="text-white me-3">Terms of Service</a>
-    <a href="{{ url('/contact') }}" class="text-white">Contact</a> 
+    <a href="{{ url('privacy') }}" class="text-black me-3">Privacy Policy</a>
+    <a href="{{ url('terms') }}" class="text-black me-3">Terms of Service</a>
+    <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
 
