@@ -2,8 +2,7 @@
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 background: linear-gradient(to right, #a8edf6, #ffffff);
-
-
+padding-top:80px;
   margin: 0;
   padding: 0;
   color: #0c1f32;
@@ -13,7 +12,10 @@ background: linear-gradient(to right, #a8edf6, #ffffff);
 .custom-navbar {
   background: linear-gradient(to right, #ffffff, #e3f2fd);
   padding: 1rem;
+  z-index: 1100;
+  top: 0;
 }
+
 
 .custom-navbar .navbar-brand img {
   height: 50px;
@@ -397,7 +399,7 @@ background: linear-gradient(to right, #a8edf6, #ffffff);
 
 .footer {
   background: linear-gradient(to left, #ffffff, #e3f2fd);
-  color: #000000; /* Set text to black */
+  color: #000000; 
   padding: 1.5rem 0;
   text-align: center;
   font-size: 0.9rem;
@@ -405,7 +407,7 @@ background: linear-gradient(to right, #a8edf6, #ffffff);
 }
 
 .footer a {
-  color: #004085; /* Matches your navbar */
+  color: #004085; 
   margin: 0 0.7rem;
   text-decoration: none;
   font-weight: 600;
@@ -417,5 +419,28 @@ background: linear-gradient(to right, #a8edf6, #ffffff);
   text-decoration: underline;
   color: #007bff;
   outline: none;
+}
+
+/* Overlay background that scrolls with the page */
+
+.overlay-container {
+  background:linear-gradient(to right, #a8edf6, #ffffff);
+  backdrop-filter: blur(3px);
+  padding-top: 100px;
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  width: 100%;
+}
+
+
+/* Shared form box styling */
+.login-box,
+.signup-box {
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.25);
 }
 

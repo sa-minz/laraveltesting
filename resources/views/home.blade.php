@@ -234,7 +234,7 @@
           <div class="carousel-item active">
             <div class="card p-4 shadow-sm mx-auto" style="max-width: 600px;">
               <p class="mb-3">"QuickMeds delivered my medicines on time. The process was smooth and hassle-free!"</p>
-              <h6 class="mb-0 text-primary">– Prabashi Perera</h6>
+              <h6 class="mb-0 text-primary">– Ruwanya Wenalie</h6>
             </div>
           </div>
           <div class="carousel-item">

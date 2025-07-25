@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>QuickMeds Pharmacy</title>
+  <title>Register - QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
   <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -35,20 +35,36 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
-        <!-- Remove logout button on login page or make functional -->
+        <a class="btn btn-outline-light" href="{{ url('login') }}"><i class="bi bi-box-arrow-in-right"></i> Login</a>
       </div>
     </div>
   </nav>
 
-  <!-- Login Form -->
+  <!-- Register Form -->
   <div class="overlay-container">
-    <div class="login-box container py-5" style="max-width: 400px;">
-      <h2 class="mb-4 text-center">Login</h2>
-      <form method="POST" action="{{ route('login.submit') }}">
+    <div class="signup-box container py-5" style="max-width: 400px;">
+      <h2 class="mb-4 text-center">Create Your Account</h2>
+      <form method="POST" action="{{ route('register.submit') }}">
         @csrf
+        <div class="mb-3">
+          <label for="nameInput" class="form-label">Name</label>
+          <input
+            type="text"
+            id="nameInput"
+            name="name"
+            class="form-control @error('name') is-invalid @enderror"
+            placeholder="Enter your full name"
+            value="{{ old('name') }}"
+            required
+            autofocus
+          />
+          @error('name')
+            <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
+          @enderror
+        </div>
 
         <div class="mb-3">
-          <label for="emailInput" class="form-label">Email</label>
+          <label for="emailInput" class="form-label">Email address</label>
           <input
             type="email"
             id="emailInput"
@@ -57,8 +73,6 @@
             placeholder="Enter email"
             value="{{ old('email') }}"
             required
-            autofocus
-            autocomplete="email"
           />
           @error('email')
             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
@@ -74,18 +88,29 @@
             class="form-control @error('password') is-invalid @enderror"
             placeholder="Password"
             required
-            autocomplete="current-password"
           />
           @error('password')
             <span class="invalid-feedback" role="alert"><strong>{{ $message }}</strong></span>
           @enderror
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Login</button>
+        <div class="mb-3">
+          <label for="passwordConfirmationInput" class="form-label">Confirm Password</label>
+          <input
+            type="password"
+            id="passwordConfirmationInput"
+            name="password_confirmation"
+            class="form-control"
+            placeholder="Confirm Password"
+            required
+          />
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
       </form>
 
       <p class="mt-3 text-center">
-        Don't have an account? <a href="{{ route('register') }}">Sign up</a>
+        Already have an account? <a href="{{ route('login') }}">Login here</a>
       </p>
     </div>
   </div>

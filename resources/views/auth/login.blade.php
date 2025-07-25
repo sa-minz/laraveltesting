@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>QuickMeds Pharmacy</title>
+  <title>Login - QuickMeds Pharmacy</title>
 
   <!-- Bootstrap & Icons -->
   <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
@@ -35,7 +35,7 @@
           </li>
           <li class="nav-item"><a class="nav-link" href="{{ url('search') }}">Order Now</a></li>
         </ul>
-        <!-- Remove logout button on login page or make functional -->
+        <a class="btn btn-outline-light" href="{{ url('register') }}"><i class="bi bi-person-plus"></i> Register</a>
       </div>
     </div>
   </nav>
