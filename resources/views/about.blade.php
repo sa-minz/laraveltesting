@@ -67,49 +67,24 @@
 
   <!-- Bootstrap JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-  <script>
+<script>
   document.addEventListener('DOMContentLoaded', () => {
-    const heading = document.querySelector('h1');
-    const image = document.querySelector('.col-md-6 img');
-    const paragraphs = document.querySelectorAll('.col-md-6:nth-child(2) p');
+    const fadeElements = [
+      document.querySelector('h1'),
+      document.querySelector('.col-md-6 img'),
+      ...document.querySelectorAll('.col-md-6:nth-child(2) p')
+    ];
 
-    // Setup initial styles for animation
-    heading.style.opacity = 0;
-    heading.style.transform = 'translateY(-30px)';
-    heading.style.transition = 'opacity 0.8s ease-out, transform 0.8s ease-out';
-
-    image.style.opacity = 0;
-    image.style.transform = 'translateX(-50px)';
-    image.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-
-    paragraphs.forEach(p => {
-      p.style.opacity = 0;
-      p.style.transform = 'translateX(50px)';
-      p.style.transition = 'opacity 1s ease-out, transform 1s ease-out';
-    });
-
-    // Animate heading first
-    setTimeout(() => {
-      heading.style.opacity = 1;
-      heading.style.transform = 'translateY(0)';
-    }, 100);
-
-    // Animate image after heading (~900ms)
-    setTimeout(() => {
-      image.style.opacity = 1;
-      image.style.transform = 'translateX(0)';
-    }, 1000);
-
-    // Animate paragraphs one by one, staggered, starting after image (~2s)
-    paragraphs.forEach((p, index) => {
+    fadeElements.forEach((el, index) => {
+      el.style.opacity = 0;
+      el.style.transition = 'opacity 1s ease-in-out';
       setTimeout(() => {
-        p.style.opacity = 1;
-        p.style.transform = 'translateX(0)';
-      }, 2000 + index * 300);
+        el.style.opacity = 1;
+      }, 300 + index * 300);
     });
   });
 </script>
+
 
 </body>
 </html>

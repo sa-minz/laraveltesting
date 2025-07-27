@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 // Public pages
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -32,9 +33,11 @@ Route::middleware('auth')->group(function () {
 Route::get('/login', [LoginController::class, 'create'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('login.submit');
 
-// Custom Register Routes
-/*Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
-Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.submit');*/
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
+    ->middleware('auth')
+    ->name('logout'); // ✅ Add this line
+
+
 
 Route::get('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [\App\Http\Controllers\Auth\RegisteredUserController::class, 'store'])->name('register.submit');
@@ -44,6 +47,11 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     
     // Example CRUD routes for a resource (e.g., products)
     Route::resource('products', ProductController::class);
+
+    Route::middleware(['auth', 'role:pharmacist'])->group(function () {
+    Route::get('/pharmacist/dashboard', [PharmacistController::class, 'dashboard'])->name('pharmacist.dashboard');
+});
+
 });
 
 ?>
