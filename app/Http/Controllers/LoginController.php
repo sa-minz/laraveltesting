@@ -7,13 +7,13 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
-    // Show the custom login form
+    // Show the login form
     public function create()
     {
-        return view('auth.login'); // Make sure this view exists
+        return view('auth.login');
     }
 
-    // Handle login form submission
+    // Process login form submission
     public function store(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -21,20 +21,22 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            // Get logged-in user
+            // Simple role-based redirects
             $user = Auth::user();
-
-            // Check role and redirect accordingly
+            
             if ($user->role === 'admin') {
-                return redirect()->intended('/admin_d'); // admin dashboard route
-            } elseif ($user->role === 'customer') {
-                return redirect()->intended('/cust_d'); // customer dashboard route
-            } else {
-                // fallback if role is missing or unknown
-                return redirect()->intended('/dashboard');
+                return redirect('/admin/dashboard');
             }
+            
+            if ($user->role === 'pharmacist') {
+                return redirect('/pharmacist/dashboard');
+            }
+            
+            // Default redirect for regular users
+            return redirect('/user/dashboard');
         }
 
+        // If authentication fails
         return back()->withErrors([
             'email' => 'Invalid credentials.',
         ])->withInput();

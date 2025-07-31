@@ -3,41 +3,42 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use App\Models\User;                      // Add this import for User model
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\View\View;
 
 class RegisteredUserController extends Controller
 {
-    // Show the custom register form
-    public function create(): View
+    /**
+     * Show the registration form.
+     */
+    public function create()
     {
-        return view('auth.register'); // make sure this view exists
+        return view('auth.register');   // Make sure this Blade view exists
     }
 
-    // Handle registration form submission
-    public function store(Request $request): RedirectResponse
+    /**
+     * Handle registration form submission.
+     */
+    public function store(Request $request)
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => ['required', 'string', 'confirmed', 'min:8'],
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role'=>'user,'
         ]);
 
-        event(new Registered($user));
         Auth::login($user);
 
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard');  // Adjust route as needed
     }
 }
