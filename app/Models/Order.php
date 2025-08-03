@@ -1,16 +1,14 @@
-<?php
-
+<?php 
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Medicine;
+use App\Models\User;
 
 class Order extends Model
 {
     protected $fillable = [
-        'user_id',
-        'medicine_id',
-        'quantity',
-        'status',
+        'user_id', 'medicine_id', 'quantity', 'total_price', 'status'
     ];
 
     public function medicine()

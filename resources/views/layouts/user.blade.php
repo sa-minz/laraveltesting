@@ -123,7 +123,7 @@
   <div class="d-flex">
     <div class="sidebar">
       <div>
-        <h4>User Panel</h4>
+        <h4>Dashboard</h4>
 
         <a href="{{ route('user.order_medicine') }}" class="{{ request()->is('user/order-medicine') ? 'active' : '' }}">
           <i class="bi bi-basket"></i> Order Medicine
