@@ -42,7 +42,10 @@
             <input type="text" name="pharmacy_name" class="form-control" required value="{{ old('pharmacy_name') }}">
         </div>
 
-        <button type="submit" class="btn btn-success">Save Pharmacist</button>
+        <div class="d-flex">
+            <button type="submit" class="btn btn-success">Save Pharmacist</button>
+            <a href="{{ route('admin.pharmacist.index') }}" class="btn btn-secondary ms-2">Cancel</a>
+        </div>
     </form>
 </div>
 @endsection

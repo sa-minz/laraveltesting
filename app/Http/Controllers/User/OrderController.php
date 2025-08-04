@@ -1,28 +1,24 @@
 <?php
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Medicine;
-use App\Models\Order;
-use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use App\Models\Order;
+use App\Models\Medicine;
 
 class OrderController extends Controller
 {
-    // Dashboard view for user
-    public function dashboard()
-    {
-        return view('user.dashboard');  // Ensure this view exists
-    }
-
-    // Show the order form with available medicines (in stock)
+    // Show the order medicine page with categories and medicines
     public function showOrderForm()
     {
-        $medicines = Medicine::where('quantity', '>', 0)->get();
-        return view('user.order_medicine', compact('medicines'));
+        // Fetch medicines grouped by category (assuming 'category' is a column)
+        $medicines = Medicine::where('quantity', '>', 0)->get()->groupBy('category');
+
+        return view('user.order_medicine', ['categories' => $medicines]);
     }
 
-    // Handle order submission
+    // Handle the submission of an order
     public function submitOrder(Request $request)
     {
         $request->validate([
@@ -30,59 +26,26 @@ class OrderController extends Controller
             'quantity' => 'required|integer|min:1',
         ]);
 
-        $medicine = Medicine::findOrFail($request->medicine_id);
+        $userId = auth()->id();
 
-        if ($request->quantity > $medicine->quantity) {
-            return back()->with('error', 'Not enough stock available.');
-        }
+        // Create order record (simplified example)
+        $order = new Order();
+        $order->user_id = $userId;
+        $order->medicine_id = $request->medicine_id;
+        $order->quantity = $request->quantity;
+        $order->status = 'pending';
+        $order->total_price = 0; // Calculate if needed
+        $order->save();
 
-        $totalPrice = $medicine->price * $request->quantity;
-
-        // Create the order record
-        $order = Order::create([
-            'user_id' => session('user_id'), // Make sure user_id is in session
-            'order_number' => 'ORD-' . strtoupper(uniqid()),
-            'total_price' => $totalPrice,
-            'status' => 'Paid',
-        ]);
-
-        // Create order item record
-        OrderItem::create([
-            'order_id' => $order->id,
-            'medicine_id' => $medicine->id,
-            'quantity' => $request->quantity,
-            'price' => $medicine->price,
-        ]);
-
-        // Decrement medicine stock
-        $medicine->decrement('quantity', $request->quantity);
-
-        return redirect()->route('user.bill', $order->id)->with('success', 'Order placed successfully.');
+        return redirect()->route('user.order_history')->with('success', 'Order placed successfully.');
     }
 
-    // Show bill for a given order
-    public function showBill($orderId)
-    {
-        $order = Order::with(['items.medicine', 'user'])->findOrFail($orderId);
-        return view('user.bill', compact('order'));
-    }
-
-    // View all orders for the logged-in user
-    public function viewOrders()
-    {
-        $userId = session('user_id');
-        $orders = Order::where('user_id', $userId)->with('items.medicine')->get();
-        return view('user.view_orders', compact('orders'));
-    }
-
-    // Show order history for the logged-in user
+    // Show all orders of the logged-in user
     public function orderHistory()
     {
-        $userId = session('user_id');
-        $orders = Order::where('user_id', $userId)
-            ->with('items.medicine')
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $userId = auth()->id();
+        $orders = Order::where('user_id', $userId)->get();
+
         return view('user.order_history', compact('orders'));
     }
 }

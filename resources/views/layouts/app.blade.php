@@ -68,4 +68,6 @@
     <button type="submit" class="btn btn-primary">Place Order</button>
   </form>
 </div>
+
+
 @endsection

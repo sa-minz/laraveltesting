@@ -21,16 +21,16 @@
     .sidebar {
       width: 240px;
       height: 100vh;
-      background-color: #bee3f8; /* pastel light blue */
+      background-color: #bee3f8;
       padding-top: 30px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start;
       box-shadow: 3px 0 10px rgba(190, 227, 248, 0.5);
     }
 
     .sidebar h4 {
-      color: #1e3a8a; /* deeper blue for contrast */
+      color: #1e3a8a;
       font-weight: 700;
       margin-bottom: 30px;
       text-align: center;
@@ -38,7 +38,7 @@
     }
 
     .sidebar a {
-      color: #1e40af; /* dark blue */
+      color: #1e40af;
       padding: 12px 24px;
       display: block;
       text-decoration: none;
@@ -56,64 +56,55 @@
 
     .sidebar a:hover,
     .sidebar .active {
-      background-color: #93c5fd; /* lighter pastel blue */
+      background-color: #93c5fd;
       color: #1e40af;
       box-shadow: 0 3px 8px rgba(147, 197, 253, 0.6);
     }
 
-    .sidebar hr {
-      border-color: rgba(30, 64, 175, 0.2);
-      margin: 30px 16px 20px 16px;
-    }
-
-    .sidebar .logout {
-      margin: 20px 16px;
-      padding: 12px 24px;
-      background-color: #3b82f6; /* bright pastel blue */
-      color: #e0e7ff;
-      font-weight: 700;
-      text-align: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(59, 130, 246, 0.5);
-      transition: background-color 0.3s ease;
-    }
-
-    .sidebar .logout:hover {
-      background-color: #2563eb; /* slightly darker blue */
-      color: #dbeafe;
-      box-shadow: 0 6px 12px rgba(37, 99, 235, 0.7);
-    }
-
-    .flex-grow-1 {
-      display: flex;
-      flex-direction: column;
-      background-color: #f0f9ff; /* very light pastel blue */
-      min-height: 100vh;
-    }
-
     .topbar {
       padding: 20px 40px;
-      background-color: #dbeafe; /* pastel blue */
-      color: #1e3a8a; /* deep blue */
+      background-color: #dbeafe;
+      color: #1e3a8a;
       font-weight: 700;
       font-size: 1.5rem;
       box-shadow: 0 2px 6px rgba(30, 58, 138, 0.15);
       user-select: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .user-menu {
+      font-size: 1rem;
+    }
+
+    .user-menu a {
+      text-decoration: none;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-left: 20px;
+    }
+
+    .user-menu a:hover {
+      text-decoration: underline;
     }
 
     .content-area {
       padding: 40px;
       flex-grow: 1;
       overflow-y: auto;
+      background-color: #f0f9ff;
     }
 
     .content-area::-webkit-scrollbar {
       width: 8px;
     }
+
     .content-area::-webkit-scrollbar-thumb {
       background-color: #93c5fd;
       border-radius: 20px;
     }
+
     .content-area::-webkit-scrollbar-track {
       background: transparent;
     }
@@ -123,8 +114,7 @@
   <div class="d-flex">
     <div class="sidebar">
       <div>
-        <h4>Dashboard</h4>
-
+        <h4>User Panel</h4>
         <a href="{{ route('user.order_medicine') }}" class="{{ request()->is('user/order-medicine') ? 'active' : '' }}">
           <i class="bi bi-basket"></i> Order Medicine
         </a>
@@ -137,24 +127,23 @@
           <i class="bi bi-clock-history"></i> Order History
         </a>
       </div>
-
-      <div>
-        <hr />
-        <a href="{{ route('logout') }}" 
-           onclick="event.preventDefault(); document.getElementById('logout-form').submit();" 
-           class="logout">
-          <i class="bi bi-box-arrow-right"></i> Logout
-        </a>
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display:none;">
-          @csrf
-        </form>
-      </div>
     </div>
 
     <div class="flex-grow-1">
       <div class="topbar">
         User Dashboard
+
+        <div class="user-menu">
+          <span>Hello, {{ Auth::user()->name }}</span>
+          <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <i class="bi bi-box-arrow-right"></i> Logout
+          </a>
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+          </form>
+        </div>
       </div>
+
       <div class="content-area">
         @yield('content')
       </div>

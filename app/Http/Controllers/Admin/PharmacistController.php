@@ -3,26 +3,26 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Pharmacist;
-use App\Models\Medicine;  // <--- Add this import
+use App\Models\Medicine;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class PharmacistController extends Controller
 {
-    // Display list of all pharmacists
+    // List all pharmacists
     public function index()
     {
         $pharmacists = Pharmacist::all();
         return view('admin.pharmacist.index', compact('pharmacists'));
     }
 
-    // Show form to create a new pharmacist
+    // Show form to create new pharmacist
     public function create()
     {
         return view('admin.pharmacist.create');
     }
 
-    // Store new pharmacist in database
+    // Store new pharmacist
     public function store(Request $request)
     {
         $request->validate([
@@ -41,19 +41,22 @@ class PharmacistController extends Controller
                          ->with('success', 'Pharmacist added successfully.');
     }
 
-    // Show form to edit an existing pharmacist
-    public function edit($id)
+    // Show single pharmacist details
+    public function show(Pharmacist $pharmacist)
     {
-        $pharmacist = Pharmacist::findOrFail($id);
-        $medicines = Medicine::all();  // <-- Add this line to get medicines
+        return view('admin.pharmacist.show', compact('pharmacist'));
+    }
+
+    // Show form to edit existing pharmacist
+    public function edit(Pharmacist $pharmacist)
+    {
+        $medicines = Medicine::all(); // For possible assignment or view use
         return view('admin.pharmacist.edit', compact('pharmacist', 'medicines'));
     }
 
-    // Update pharmacist details in database
-    public function update(Request $request, $id)
+    // Update pharmacist details
+    public function update(Request $request, Pharmacist $pharmacist)
     {
-        $pharmacist = Pharmacist::findOrFail($id);
-
         $request->validate([
             'name'           => 'required|string|max:255',
             'email'          => 'required|email|unique:pharmacists,email,' . $pharmacist->id,
@@ -70,17 +73,9 @@ class PharmacistController extends Controller
                          ->with('success', 'Pharmacist updated successfully.');
     }
 
-    // Show details of a single pharmacist
-    public function show($id)
+    // Delete pharmacist
+    public function destroy(Pharmacist $pharmacist)
     {
-        $pharmacist = Pharmacist::findOrFail($id);
-        return view('admin.pharmacist.show', compact('pharmacist'));
-    }
-
-    // Delete pharmacist from database
-    public function destroy($id)
-    {
-        $pharmacist = Pharmacist::findOrFail($id);
         $pharmacist->delete();
 
         return redirect()->route('admin.pharmacist.index')

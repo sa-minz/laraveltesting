@@ -55,4 +55,9 @@ Route::prefix('user')->name('user.')->group(function () {
 
     Route::get('view-orders', [OrderController::class, 'viewOrders'])->name('view_orders');
     Route::get('order-history', [OrderController::class, 'orderHistory'])->name('order_history');
+
+    // Order routes
+    Route::post('process-order', [OrderController::class, 'processOrder'])->name('process_order');
+    Route::get('payment/{order}', [OrderController::class, 'showPayment'])->name('payment');
+    Route::post('payment/{order}/confirm', [OrderController::class, 'confirmPayment'])->name('confirm_payment');
 });

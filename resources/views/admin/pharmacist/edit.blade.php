@@ -1,29 +1,52 @@
-<!-- resources/views/admin/pharmacist/edit.blade.php -->
-
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
-    <h1>Edit Pharmacist</h1>
+<div class="container">
+    <h2>Edit Pharmacist</h2>
+
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form action="{{ route('admin.pharmacist.update', $pharmacist->id) }}" method="POST">
         @csrf
         @method('PUT')
 
-        <label>Name:</label>
-        <input type="text" name="name" value="{{ old('name', $pharmacist->name) }}" required><br>
+        <div class="mb-3">
+            <label for="name" class="form-label">Pharmacist Name</label>
+            <input type="text" name="name" class="form-control" value="{{ old('name', $pharmacist->name) }}" required>
+        </div>
 
-        <label>Email:</label>
-        <input type="email" name="email" value="{{ old('email', $pharmacist->email) }}" required><br>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" name="email" class="form-control" value="{{ old('email', $pharmacist->email) }}" required>
+        </div>
 
-        <label>Phone:</label>
-        <input type="text" name="phone" value="{{ old('phone', $pharmacist->phone) }}"><br>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="text" name="phone" class="form-control" value="{{ old('phone', $pharmacist->phone) }}">
+        </div>
 
-        <label>License Number:</label>
-        <input type="text" name="license_number" value="{{ old('license_number', $pharmacist->license_number) }}"><br>
+        <div class="mb-3">
+            <label for="license_number" class="form-label">License Number</label>
+            <input type="text" name="license_number" class="form-control" value="{{ old('license_number', $pharmacist->license_number) }}">
+        </div>
 
-        <label>Pharmacy Name:</label>
-        <input type="text" name="pharmacy_name" value="{{ old('pharmacy_name', $pharmacist->pharmacy_name) }}"><br>
+        <div class="mb-3">
+            <label for="pharmacy_name" class="form-label">Pharmacy Name</label>
+            <input type="text" name="pharmacy_name" class="form-control" value="{{ old('pharmacy_name', $pharmacist->pharmacy_name) }}">
+        </div>
 
-        <button type="submit">Update</button>
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Update Pharmacist</button>
+            <a href="{{ route('admin.pharmacist.index') }}" class="btn btn-secondary">Cancel</a>
+        </div>
     </form>
+</div>
 @endsection
