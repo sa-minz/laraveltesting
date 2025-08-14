@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>Admin Dashboard - QuickMeds</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-</head>
+  <link href="{{ asset('css/bootstrap-icons.css') }}" rel="stylesheet" />
 <body>
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
@@ -90,6 +89,6 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

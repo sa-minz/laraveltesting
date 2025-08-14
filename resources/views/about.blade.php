@@ -4,12 +4,12 @@
   <meta charset="UTF-8" />
   <title>QuickMeds Pharmacy</title>
 
-  <!-- Bootstrap & Icons -->
-  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-
-  <!-- Your Custom CSS -->
-  <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+<link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+<!-- Bootstrap Icons -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+<!-- Your Custom CSS -->
+<link href="{{ asset('css/style.css') }}" rel="stylesheet" />
 </head>
 <body>
   <!-- Navbar -->
@@ -64,9 +64,8 @@
     <a href="{{ url('contact') }}" class="text-black">Contact</a> 
   </div>
 </footer>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap JS Bundle -->
+ <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const fadeElements = [

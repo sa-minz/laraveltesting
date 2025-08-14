@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - QuickMeds Pharmacy</title>
 
-  <!-- Bootstrap & Icons -->
-  <link href="{{ asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Local Bootstrap & Icons -->
+  <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" />
+  <link href="{{ asset('webfonts/bootstrap-icons.css') }}" rel="stylesheet" />
 
   <!-- Your Custom CSS -->
   <link href="{{ asset('css/style.css') }}" rel="stylesheet" />
@@ -81,15 +82,19 @@
           @enderror
         </div>
 
+        <div class="mb-3 form-check">
+          <input type="checkbox" name="remember" id="remember" class="form-check-input">
+          <label class="form-check-label" for="remember">Remember Me</label>
+        </div>
+
         <button type="submit" class="btn btn-primary w-100">Login</button>
       </form>
 
-      <p class="mt-3 text-center">
-        Don't have an account? <a href="{{ route('register') }}">Sign up</a>
-      </p>
+      
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Local Bootstrap JS -->
+  <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

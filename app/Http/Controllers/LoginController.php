@@ -17,8 +17,9 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        $remember = $request->filled('remember'); // Check if "Remember Me" was checked
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $remember)) { // Pass $remember to attempt()
             $request->session()->regenerate();
 
             // Simple role-based redirects
@@ -27,7 +28,6 @@ class LoginController extends Controller
             if ($user->role === 'admin') {
                 return redirect('/admin/dashboard');
             }
-          
             
             // Default redirect for regular users
             return redirect('/user/dashboard');

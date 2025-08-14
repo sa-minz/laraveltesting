@@ -1,73 +1,55 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>@yield('title') | Pharmacy System</title>
+    
+    <!-- CSS Files -->
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('webfonts/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+    
+    <style>
+        .main-content {
+            padding: 1rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .main-content {
+                padding: 2rem 0;
+            }
+        }
+        
+        /* Ensure footer stays at bottom */
+        html, body {
+            height: 100%;
+        }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .main-content {
+            flex: 1 0 auto;
+        }
+    </style>
+</head>
+<body>
+    @include('partials.navbar')
+    
+    <main class="main-content">
+        <div class="container">
+            @yield('content')
+        </div>
+    </main>
+    
+    @include('partials.footer')
 
-@section('content')
-<div class="container mt-4">
-  <h2>Order Medicine</h2>
-
-  @if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      {{ session('success') }}
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-  @endif
-
-  <form action="{{ route('user.order_medicine.submit') }}" method="POST" novalidate>
-    @csrf
-
-    <div class="mb-3">
-      <label for="medicine_id" class="form-label">Select Medicine</label>
-      <select name="medicine_id" id="medicine_id" class="form-select @error('medicine_id') is-invalid @enderror" required>
-        <option value="">-- Choose Medicine --</option>
-        @foreach($medicines as $medicine)
-          <option value="{{ $medicine->id }}" {{ old('medicine_id') == $medicine->id ? 'selected' : '' }}>
-            {{ $medicine->name }} - ${{ number_format($medicine->price, 2) }}
-          </option>
-        @endforeach
-      </select>
-      @error('medicine_id')
-        <div class="invalid-feedback">{{ $message }}</div>
-      @enderror
-    </div>
-
-    <div class="mb-3">
-      <label for="quantity" class="form-label">Quantity</label>
-      <input type="number" name="quantity" id="quantity" class="form-control @error('quantity') is-invalid @enderror" min="1" value="{{ old('quantity', 1) }}" required />
-      @error('quantity')
-        <div class="invalid-feedback">{{ $message }}</div>
-      @enderror
-    </div>
-
-    <hr>
-
-    <h5>Payment Details</h5>
-
-    <div class="mb-3">
-      <label for="card_number" class="form-label">Card Number</label>
-      <input type="text" name="card_number" id="card_number" class="form-control @error('card_number') is-invalid @enderror" value="{{ old('card_number') }}" required />
-      @error('card_number')
-        <div class="invalid-feedback">{{ $message }}</div>
-      @enderror
-    </div>
-
-    <div class="mb-3">
-      <label for="expiry_date" class="form-label">Expiry Date (MM/YY)</label>
-      <input type="text" name="expiry_date" id="expiry_date" class="form-control @error('expiry_date') is-invalid @enderror" value="{{ old('expiry_date') }}" placeholder="MM/YY" required />
-      @error('expiry_date')
-        <div class="invalid-feedback">{{ $message }}</div>
-      @enderror
-    </div>
-
-    <div class="mb-3">
-      <label for="cvv" class="form-label">CVV</label>
-      <input type="text" name="cvv" id="cvv" class="form-control @error('cvv') is-invalid @enderror" value="{{ old('cvv') }}" required />
-      @error('cvv')
-        <div class="invalid-feedback">{{ $message }}</div>
-      @enderror
-    </div>
-
-    <button type="submit" class="btn btn-primary">Place Order</button>
-  </form>
-</div>
-
-
-@endsection
+    <!-- JS Files -->
+    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    @yield('scripts')
+</body>
+</html>

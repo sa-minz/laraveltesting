@@ -45,19 +45,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 // User routes
-Route::prefix('user')->name('user.')->group(function () {
+Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('dashboard', [OrderController::class, 'dashboard'])->name('dashboard');
-
     Route::get('order-medicine', [OrderController::class, 'showOrderForm'])->name('order_medicine');
     Route::post('order-medicine', [OrderController::class, 'submitOrder'])->name('order_medicine.submit');
-
     Route::get('bill/{order}', [OrderController::class, 'showBill'])->name('bill');
-
     Route::get('view-orders', [OrderController::class, 'viewOrders'])->name('view_orders');
     Route::get('order-history', [OrderController::class, 'orderHistory'])->name('order_history');
-
-    // Order routes
-    Route::post('process-order', [OrderController::class, 'processOrder'])->name('process_order');
     Route::get('payment/{order}', [OrderController::class, 'showPayment'])->name('payment');
     Route::post('payment/{order}/confirm', [OrderController::class, 'confirmPayment'])->name('confirm_payment');
+    Route::get('payment/{order}/success', [OrderController::class, 'paymentSuccess'])->name('payment.success');
+    Route::get('receipt/{order}/download', [OrderController::class, 'downloadReceipt'])->name('receipt.download');
+
+    
 });

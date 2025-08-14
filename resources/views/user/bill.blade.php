@@ -1,42 +1,36 @@
-@extends('layouts.app')
+@extends('layouts.user')
 
 @section('content')
-<div class="container mt-4">
-    <h2>Order Bill</h2>
+<div class="container my-5" style="max-width: 600px;">
+    <h2 class="text-primary mb-4">Order Bill</h2>
 
-    <div class="card p-3">
-        <p><strong>Order Number:</strong> {{ $order->order_number }}</p>
-        <p><strong>Customer:</strong> {{ $order->user->name }}</p>
-        <p><strong>Status:</strong> {{ $order->status }}</p>
-        <p><strong>Date:</strong> {{ $order->created_at->format('Y-m-d H:i') }}</p>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-        <h4 class="mt-3">Order Details:</h4>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Medicine</th>
-                    <th>Unit Price (Rs.)</th>
-                    <th>Quantity</th>
-                    <th>Subtotal (Rs.)</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($order->items as $item)
-                    <tr>
-                        <td>{{ $item->medicine->name }}</td>
-                        <td>{{ number_format($item->price, 2) }}</td>
-                        <td>{{ $item->quantity }}</td>
-                        <td>{{ number_format($item->price * $item->quantity, 2) }}</td>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
+    <div class="card p-4">
+        <p><strong>Order ID:</strong> {{ $order->id }}</p>
+        <p><strong>Medicine:</strong> {{ $order->medicine->name }}</p>
+        <p><strong>Quantity:</strong> {{ $order->quantity }}</p>
+        <p><strong>Unit Price:</strong> Rs. {{ number_format($order->medicine->price, 2) }}</p>
+        <p><strong>Total Price:</strong> Rs. {{ number_format($order->total_price, 2) }}</p>
+        <p><strong>Status:</strong> {{ ucfirst($order->status) }}</p>
+        <p><strong>Order Date:</strong> {{ $order->created_at->format('d M Y, H:i') }}</p>
+        @if($order->transaction_id)
+            <p><strong>Transaction ID:</strong> {{ $order->transaction_id }}</p>
+        @endif
+    </div>
 
-        <h5 class="text-end">Total: Rs. {{ number_format($order->total_price, 2) }}</h5>
-
-        <div class="text-end mt-3">
-            <button class="btn btn-success" onclick="window.print()">Print Bill</button>
-        </div>
+    <div class="mt-4 d-flex justify-content-between">
+        <a href="{{ route('user.order_history') }}" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Back to Orders
+        </a>
+        <a href="{{ route('user.receipt.download', $order->id) }}" class="btn btn-success">
+            <i class="bi bi-download"></i> Download Receipt
+        </a>
+        <button onclick="window.print()" class="btn btn-secondary">
+            <i class="bi bi-printer"></i> Print Receipt
+        </button>
     </div>
 </div>
 @endsection

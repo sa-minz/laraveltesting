@@ -1,12 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-/* Payment form styling */
+/* Bootstrap CSS (import from node_modules) */
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+/* Your custom styles below */
 #paymentForm input {
     margin-bottom: 10px;
 }
 
-/* Modal styling */
 .modal-content {
     border-radius: 10px;
 }
